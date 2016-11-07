@@ -228,7 +228,8 @@ bool process_tapping(keyrecord_t *keyp)
         if (WITHIN_TAPPING_TERM(event)) {
             if (event.pressed) {
                 if (IS_TAPPING_KEY(event.key)) {
-                    if (!tapping_key.tap.interrupted && tapping_key.tap.count > 0) {
+                    //if (!tapping_key.tap.interrupted && tapping_key.tap.count > 0) {
+                    if (false) {
                         // sequential tap.
                         keyp->tap = tapping_key.tap;
                         if (keyp->tap.count < 15) keyp->tap.count += 1;

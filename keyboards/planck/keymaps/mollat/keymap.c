@@ -28,7 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   { LT(_MOUSE, KC_ESC),KC_Q,KC_W,       KC_E,       KC_R,       KC_T,       KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSPC    },
   { LT(_FN, KC_TAB),KC_A,   KC_S,       KC_D,       KC_F,       KC_G,       KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT    },
   { KC_LSFT,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    SFT_T(KC_ENT)},
-  { __________, __________, KC_LGUI,    KC_LALT,    KC_LCTL,LT(_TMUX, KC_SPC),LT(_HIGH, KC_SPC),MO(_LOW),KC_RALT,KC_RGUI,   __________, __________ }
+  { __________, KC_LGUI,    KC_RALT,    KC_LALT,    KC_LCTL,LT(_TMUX, KC_SPC),LT(_HIGH, KC_SPC),MO(_LOW),KC_LEFT,KC_DOWN,   KC_UP,      KC_RIGHT   }
 },
 
 // missing keys regarding to the form factor
@@ -38,7 +38,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   { KC_GRV,     KC_EXLM,    KC_AT,      KC_HASH,    KC_DLR,     KC_PERC,    KC_CIRC,    KC_AMPR,    KC_ASTR,    KC_LPRN,    KC_RPRN,    KC_MINS    },
   { __________, KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_EQL     },
   { __________, __________, __________, __________, __________, __________, __________, __________, KC_COMM,    KC_DOT,     KC_BSLS,    LSFT(KC_BSLS)},
-  { __________, __________, __________, __________, __________, __________, KC_TRNS,    __________, __________, __________, __________, __________ }
+  { __________, __________, __________, KC_TRNS,    KC_TRNS,    __________, KC_TRNS,    __________, __________, __________, __________, __________ }
 },
 
 // classic Fn-Layer triggered with 'CapsLock-key' like on Pok3r
@@ -48,20 +48,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ins at 'i'
 // del besides backspace (had no better place for it because of the umlauts)
 // pg-down at 'f' (forward in vi), pg-up at 'b' (back in 'vi')
-//
+
 [_FN] = {
-  { __________, __________, __________, KC_END,     __________, __________, __________, __________, KC_INS,     __________, KC_DEL,     RALT(KC_Y) },
-  { KC_TRNS,    __________, RALT(KC_S), __________, KC_PGDN,    RALT(KC_5), KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT,    RALT(KC_P), RALT(KC_Q) },
-  { __________, KC_HOME,    __________, __________, __________, KC_PGUP,    __________, __________, __________, __________, __________, KC_ENT     },
-  { RESET,      __________, __________, __________, __________, KC_SPC,     KC_SPC,     __________, __________, __________, __________, __________ }
+  { __________, __________, __________, KC_END,     __________, KC_TAB,     __________, __________, KC_INS,     __________, KC_DEL,     RALT(KC_Y) },
+  { KC_TRNS,    KC_HOME,    RALT(KC_S), __________, KC_PGDN,    RALT(KC_5), KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT,    RALT(KC_P), RALT(KC_Q) },
+  { KC_TRNS,    __________, __________, __________, __________, KC_PGUP,    __________, __________, __________, __________, KC_ENTER,   KC_TRNS    },
+  { RESET,      __________, __________, KC_TRNS,    KC_TRNS,    KC_SPC,     KC_SPC,     __________, __________, __________, __________, __________ }
 },
 
 // function key layer and some shift + (missing key at the small form factor)
 [_LOW] = {
   { KC_TILD,    __________, __________, __________, __________, __________, __________, __________, __________, KC_LCBR,    KC_RCBR,    KC_UNDS    },
   { __________, KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,      KC_F7,      KC_F8,      KC_LBRC,    KC_RBRC,    KC_PLUS    },
-  { __________, __________, __________, __________, __________, KC_F9,      KC_F10,     KC_F11,     KC_F12,     __________, __________, __________ },
-  { __________, __________, __________, __________, __________, __________, __________, KC_TRNS,    __________, __________, __________, __________ }
+  { KC_TRNS,    __________, __________, __________, __________, KC_F9,      KC_F10,     KC_F11,     KC_F12,     __________, KC_BSLS,    KC_TRNS    },
+  { __________, __________, __________, KC_TRNS,    KC_TRNS,    __________, __________, KC_TRNS,    __________, __________, __________, __________ }
 },
 
 // most macros will switch tmux screens
@@ -143,7 +143,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
           // tmux press ctrl-b
         case 15:
           return MACRODOWN( DOWN(KC_LCTL), TYPE(KC_B), UP(KC_LCTL), END );
-          break;
       }
     return MACRO_NONE;
 };
